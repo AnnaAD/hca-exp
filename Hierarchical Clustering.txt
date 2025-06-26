@@ -1,0 +1,154 @@
+Hierarchical Clustering 
+Review 
+ 
+
+Clustering 
+Input Outputs: A dendrogram categorizing cluster similarity. 
+a dendogram of ~5000 points 
+ 
+
+Methods 
+Agglomerative: Agglomerative: Agglomerative clustering, often referred to as a "bottom-up" approach, begins with each data point as an individual cluster. At each step, the algorithm merges the two most similar clusters based on a chosen distance metric (e.g., Euclidean distance) and linkage criterion (e.g., single-linkage, complete-linkage)[2]. This process continues until all data points are combined into a single cluster or a stopping criterion is met. Agglomerative methods are more commonly used due to their simplicity and computational efficiency for small to medium-sized datasets [3].  
+Divisive: Divisive clustering, known as a "top-down" approach, starts with all data points in a single cluster and recursively splits the cluster into smaller ones. At each step, the algorithm selects a cluster and divides it into two or more subsets, often using a criterion such as maximizing the distance between resulting clusters. Divisive methods are less common but can be useful when the goal is to identify large, distinct clusters first. 
+https://en.wikipedia.org/wiki/Hierarchical_clustering 
+ 
+
+Linkage Criterion 
+Single-Link 
+D(X,Y) = min d(x,y) foreach x in X and y in Y 
+Complete-Link 
+D(X,Y) = max d(x,y) foreach x in X and y in Y  
+ 
+
+Naive Approach 
+Complexity: O(n3) Memory Complexity: O(n2) 
+groups = pairs.len
+while groups != 1: 
+	pair = find_closest_pair(points) 	
+merge(pair) //removes pair from distance matrix and marks in dendrogram
+groups -= 1 
+def find_closest_pair(points): 	
+for p1 in points: 		
+for p2 in (points after p1): 			
+if(distance[p1][p2] < min) ...
+     return point
+ 
+
+Merging
+Within merge, must update distance matrix such that, for a new cluster j U i, 
+D(j U i, k) = min(d(i,k), d(j,k)) for single link
+or
+D(j U i, k) = max(d(i,k), d(j,k)) for complete link
+
+This step is O(n2) as well. 
+Note: This computation means that 
+
+
+Slink/Clink Algorithm 
+Sibson proposed an algorithm with time complexity  O(n2)  and space complexity  O(n)  (both optimal) known as SLINK. The slink algorithm represents a clustering on a set of  n  numbered items by two functions. These functions are both determined by finding the smallest cluster  C  that contains both item  i  and at least one larger-numbered item. The first function,  π , maps item  i  to the largest-numbered item in cluster  C . The second function,  λ , maps item  i  to the distance associated with the creation of cluster  C. Storing these functions in two arrays that map each item number to its function value takes space  O(n), and this information is sufficient to determine the clustering itself. 
+
+As Sibson shows, when a new item is added to the set of items, the updated functions representing the new single-linkage clustering for the augmented set, represented in the same way, can be constructed from the old clustering in time O(n). The SLINK algorithm then loops over the items, one by one, adding them to the representation of the clustering.
+      
+https://github.com/jackyust/SLINK_CLINK  
+ 
+
+Current Tools
+https://docs.scipy.org/doc/scipy/reference/cluster.hierarchy.html#module-scipy.cluster.hierarchy
+https://github.com/scipy/scipy/blob/main/scipy/cluster/hierarchy.py#L814
+.. [1] Daniel Mullner, "Modern hierarchical, agglomerative clustering
+           algorithms", :arXiv:`1109.2378v1`.
+.. [2] Ziv Bar-Joseph, David K. Gifford, Tommi S. Jaakkola, "Fast optimal
+           leaf ordering for hierarchical clustering", 2001. Bioinformatics
+           :doi:`10.1093/bioinformatics/17.suppl_1.S22`
+
+“Modern hierarchical, agglomerative clustering algorithms” (2011)
+https://arxiv.org/pdf/1109.2378
+
+source: https://cran.r-project.org/web/packages/fastcluster/ 
+
+
+
+SciPy Implementation
+https://github.com/scipy/scipy/blob/main/scipy/cluster/hierarchy.py 
+ 		if method == 'single':
+            return _hierarchy.mst_single_linkage(y, n)
+        elif method in ('complete', 'average', 'weighted', 'ward'):
+            return _hierarchy.nn_chain(y, n, method_code)
+        else:
+            return _hierarchy.fast_linkage(y, n, method_code)
+
+
+_hierarchy.pyx
+https://github.com/scipy/scipy/blob/main/scipy/cluster/_hierarchy.pyx
+def mst_single_linkage(const double[:] dists, int n):
+    """Perform hierarchy clustering using MST algorithm for single linkage.
+def nn_chain(const double[:] dists, int n, int method):
+    """Perform hierarchy clustering using nearest-neighbor chain algorithm.
+def fast_linkage(const double[:] dists, int n, int method):
+    """Perform hierarchy clustering.
+
+    It implements "Generic Clustering Algorithm" from [1]. The worst case
+    time complexity is O(N^3), but the best case time complexity is O(N^2) and
+    it usually works quite close to the best case.
+
+Conclusion: SciPy Uses MST Algorithm for Hierarchical Clustering
+Gower and Ross (1969) observed that a single linkage dendrogram can be obtained from a minimum spanning tree (MST) of the weighted graph which is given by the complete graph on the singleton set S with the dissimilarities as edge weights. The algorithm here was originally described by Rohlf (1973) and is based on Prim’s algorithm for the MST (see Cormen et al., 2009, § 23.2).
+
+Observation: All methods discussed by Mullner rely on distance matrix?
+The input to the algorithm is the list of N choose 2  pairwise dissimilarities between N points
+ The first item has always been a distinctive characteristic to previous authors since the input format broadly divides into the stored matrix approach (Anderberg, 1973, § 6.2) and the stored data approach (Anderberg, 1973, § 6.3). In contrast, the second condition has not been given attention yet, but we will see that it affects the validity of algorithms.
+Stored matrix approach: Use matrix, and then apply Lance-Williams to recalculate dissimilarities between cluster centers. Storage is therefore O(N**2) and time is at least O(N**2), but will be O(N**3) if matrix is scanned linearly.
+Stored data approach: O(N) space for data but recompute pairwise dissimilarities so need O(N**3) time
+Sorted matrix approach: O(N**2) to calculate dissimilarity matrix, O(N**2 log N**2) to sort it, O(N**2) to construct hierarchy, but one need not store the data set, and the matrix can be processed linearly, which reduces disk accesses.
+http://facweb.cs.depaul.edu/mobasher/classes/csc575/clustering/CL-alg-details.html 
+
+Note from author
+Another issue which is not in the focus of this paper is that of parallel algorithms. For the “stored matrix approach”, this has a good reason since the balance of memory requirements versus computational complexity does not make it seem worthwhile to attempt parallelization with current hardware. This changes for vector data, when the available memory is not the limiting factor and the run-time is pushed up by bigger data sets. In high-dimensional vector spaces, the advanced clustering algorithms in this paper require little time compared to the computation of inter-cluster distances. Hence, parallelizing the nearest-neighbor searches with their inherent distance computations appears a fruitful and easy way of sharing the workload. The situation becomes less clear for low-dimensional data, however.
+
+Question
+Can one apply parallelization to this computation?
+Simpler to implement in some way for the min distance computation.
+parallel batching of the for-loop and store minimum/maximum results locally
+final step, combine results of min/max batches and make final merge
+Difficult to implement for outer merge loops (as these are all sequential steps which change the problem space with a merge)
+Maybe could “guess” that certain parallel computation will be useful/non-overlapping
+Far points are not apart of the same cluster in first many steps.
+
+Question
+Is there a useful heuristic that can be applied to help with the “min-distance” aspect of computation?
+quadtrees can tell you quickly what set points appear in a given cell region (for 2-dimensional vector only?)
+idea: looking for min distance to each point, can search quadtree only for points within that region
+NOTE: this may have to span across several cell boundaries? 
+Use a kd-tree to find nearest neighbor(s)
+may be unbalanced if points are added/deleted regularly?
+adding to and updating the kd tree may be slow?
+For both these approaches “merging” points may not allow single-link or complete-link method but might need a centroid based approach? Otherwise, how would you update the kd-tree once a point has been merged into a cluster? Would need to be able to quickly search kd-tree filtered out with pts in same cluster. (maybe a mask on each edge of the kd-tree for traversal to omit same cluster pts?)
+
+Note about vector data dimensionality (Section 6)
+If the input to a SAHN clustering algorithm is not the array of pairwise dissimilarities but N points in a D-dimensional real vector space, the lower bound Ω(N2 ) on time complexity does not hold any more. Since much of the time in an SAHN clustering scheme is spent on nearest-neighbor searches, algorithms and data structures for fast nearest-neighbor searches can potentially be useful. The situation is not trivial, however, since (1) in the “combinatorial” methods (e.g. single, complete, average, weighted linkage) the inter-cluster distances are not simply defined as distances between special points like cluster centers, and (2) even in the “geometric” methods (the Ward, centroid and median schemes), points are removed and new centers added with the same frequency as pairs of closest points are searched, so a dynamic nearest-neighbor algorithm is needed, which handles the removal and insertion of points efficiently.
+
+Approximate Nearest Neighbors?
+https://stackoverflow.com/questions/5751114/nearest-neighbors-in-high-dimensional-data 
+
+Locality-Sensitive Hashing (LSH), which maps a set of points in a high-dimensional space into a set of bins, i.e., a hash table [1][3]. But unlike traditional hashes, a locality-sensitive hash places nearby points into the same bin.
+[1] Datar, Indyk, Immorlica, Mirrokni, "Locality-Sensitive Hashing Scheme Based on p-Stable Distributions," 2004.
+[2] Weber, Schek, Blott, "A quantitative analysis and performance study for similarity-search methods in high-dimensional spaces," 1998.
+[3] Gionis, Indyk, Motwani, "Similarity search in high dimensions via hashing," 1999.
+[4] Slaney, Casey, "Locality-sensitive hashing for finding nearest neighbors", 2008.
+
+
+LSH Based Hierarchical Clustering
+https://www.researchgate.net/publication/221612964_Fast_Hierarchical_Clustering_Algorithm_Using_Locality-Sensitive_Hashing#read
+https://www.cochez.nl/papers/twister_tries.pdf
+	Note: maybe is slow
+https://github.com/miselico/twistertries-reproducibility
+
+
+Rough Idea
+Dynamic kd-tree or LSH table with modification.
+Functionality: 
+add(point, tree, cluster_id)
+adds point to tree, marking with cluster_id
+is there a way that points with same cluster_id would always be FAR in kd tree?
+search(point, tree, exclude_cluster)
+returns closest_point, which is the nearest to point in tree (that does not belong to exclude_cluster)
