@@ -1,8 +1,4 @@
-Here's your `.txt` file reformatted as clean, structured Markdown with appropriate headers, subheaders, code formatting, and reference links:
-
----
-
-# Hierarchical Clustering
+# Hierarchical Clustering Notes
 
 ## Review
 
@@ -16,6 +12,9 @@ A dendrogram categorizing cluster similarity.
 
 ## Methods
 
+The following is an excerpt from:
+[Wikipedia - Hierarchical Clustering](https://en.wikipedia.org/wiki/Hierarchical_clustering)
+
 ### Agglomerative
 
 Agglomerative clustering, often referred to as a "bottom-up" approach, begins with each data point as an individual cluster. At each step, the algorithm merges the two most similar clusters based on a chosen distance metric (e.g., Euclidean distance) and linkage criterion (e.g., single-linkage, complete-linkage) \[2]. This process continues until all data points are combined into a single cluster or a stopping criterion is met. Agglomerative methods are more commonly used due to their simplicity and computational efficiency for small to medium-sized datasets \[3].
@@ -23,8 +22,6 @@ Agglomerative clustering, often referred to as a "bottom-up" approach, begins wi
 ### Divisive
 
 Divisive clustering, known as a "top-down" approach, starts with all data points in a single cluster and recursively splits the cluster into smaller ones. At each step, the algorithm selects a cluster and divides it into two or more subsets, often using a criterion such as maximizing the distance between resulting clusters. Divisive methods are less common but can be useful when the goal is to identify large, distinct clusters first.
-
-[Wikipedia - Hierarchical Clustering](https://en.wikipedia.org/wiki/Hierarchical_clustering)
 
 ---
 
