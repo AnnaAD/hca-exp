@@ -6,8 +6,10 @@
 # compiler options
 #--------------------------------------------
 CC = g++
-CFLAGS = -Wall -g
-LDFLAGS = -lstdc++
+CFLAGS = -Wall -g -std=c++11 
+LDFLAGS = -L/opt/homebrew/opt/libomp/lib -lstdc++
+INCLUDES = -I/opt/homebrew/opt/libomp/include -I../include 
+
 
 # project files
 #--------------------------------------------
@@ -21,11 +23,11 @@ TGZDIR = hclust-cpp
 all: $(PROGRAM)
 
 $(PROGRAM): $(OBJECTS)
-	$(CC) -o $@ $+ $(LDFLAGS)
+	$(CC) -o $@ $+ $(LDFLAGS) $(INCLUDES) -lomp
 
 # generic rule for compiling *.cpp -> *.o
 %.o: %.cpp
-	$(CC) $(CFLAGS) $(CPPFLAGS) -c $*.cpp
+	$(CC) $(CFLAGS) $(CPPFLAGS) $(INCLUDES) -Xpreprocessor -fopenmp -c $*.cpp
 
 clean:
 	rm -f $(PROGRAM) $(OBJECTS)

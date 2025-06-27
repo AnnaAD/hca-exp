@@ -16,6 +16,8 @@
 #include <algorithm>
 
 #include "fastcluster.h"
+#include <timer.h>
+#include <omp.h>
 
 
 // 2D point or vector
@@ -102,6 +104,8 @@ int main(int argc, char** argv)
     return 1;
   }
   
+  Timer t;
+  t.Start();
   // read line segments from input file
   std::vector<Segment> segs;
   double x1,x2,y1,y2;
@@ -122,32 +126,47 @@ int main(int argc, char** argv)
   }
   fclose(f);
 
-  printf(">>Loaded Input Data\n");
+  t.Stop();
 
+  printf(">>Loaded Input Data: %lf\n", t.Seconds());
+
+  int num_threads = 1;
+  #pragma omp parallel
+  {
+    #pragma omp single
+    num_threads = omp_get_num_threads();
+  }
+  std::cout << "OpenMP (" << num_threads << " threads)\n";
+
+  t.Start();
   // computation of condensed distance matrix
   double* distmat = new double[(npoints*(npoints-1))/2];
-  k = 0;
+  #pragma omp parallel for schedule(static,64)
   for (i=0; i<npoints; i++) {
     for (j=i+1; j<npoints; j++) {
+      int k = (i * (2 * npoints - i - 1)) / 2 + (j - i - 1);
       distmat[k] = distance(segs[i], segs[j]);
-      k++;
     }
   }
 
-  printf(">>Generated Distance Matrix\n");
+  t.Stop();
 
+  printf(">>Generated Distance Matrix: %lf\n", t.Seconds());
 
+  t.Start();
   // clustering call
   int* merge = new int[2*(npoints-1)];
   double* height = new double[npoints-1];
   hclust_fast(npoints, distmat, opt_method, merge, height);
+  t.Stop();
+  printf(">>Completed Clustering: %lf\n", t.Seconds());
 
-  printf(">>Completed Clustering\n");
-
+  t.Start();
   int* labels = new int[npoints];
   cutree_k(npoints, merge, 2, labels);
+  t.Stop();
   //cutree_cdist(npoints, merge, height, 0.5, labels);
-  printf(">>Completed Labeling\n");
+  printf(">>Completed Labeling: %lf\n\n", t.Seconds());
 
   // print result
   for (i=0; i<npoints; i++) {
