@@ -23,7 +23,7 @@
 #include <future>
 # include <thread>
 
-# include <Eigen/Core>
+# include <eigen3/Eigen/Core>
 #define EIGEN_DONT_PARALLELIZE
 
 // User header

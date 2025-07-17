@@ -17,7 +17,7 @@
 # ifndef _SG_TREE_H
 # define _SG_TREE_H
 
-#include <Eigen/Core>
+#include <eigen3/Eigen/Core>
 #include <atomic>
 #include <fstream>
 #include <iostream>

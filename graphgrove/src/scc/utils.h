@@ -28,7 +28,7 @@
 #include <thread>
 #include <future>
 
-#include <Eigen/Core>
+#include <eigen3/Eigen/Core>
 
 #ifdef _FLOAT64_VER_
 #define MY_NPY_FLOAT NPY_FLOAT64

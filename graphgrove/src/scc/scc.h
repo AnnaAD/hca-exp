@@ -40,7 +40,7 @@
 #define SHARED_MUTEX_TYPE shared_timed_mutex
 #endif
 
-#include <Eigen/Core>
+#include <eigen3/Eigen/Core>
 
 #include "utils.h"
 

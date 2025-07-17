@@ -27,7 +27,7 @@
 #include <thread>
 #include <future>
 
-#include <Eigen/Core>
+#include <eigen3/Eigen/Core>
 
 #ifdef _MSC_VER
 

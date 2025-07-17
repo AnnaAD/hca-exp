@@ -17,7 +17,7 @@
 # ifndef _COVER_TREE_H
 # define _COVER_TREE_H
 
-#include <Eigen/Core>
+#include <eigen3/Eigen/Core>
 #include <atomic>
 #include <fstream>
 #include <iostream>

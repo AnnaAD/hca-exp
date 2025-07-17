@@ -32,13 +32,17 @@ np.random.seed(123)
 cores = 12
 
 print('======== Building Dataset ==========')
-N=1000
-K=5
-D=784
-means = 20*np.random.rand(K,D) - 10
-x = np.vstack([np.random.randn(N,D) + means[i] for i in range(K)])
-np.random.shuffle(x)
-x = unit_norm(x)
+# N=1000
+# K=5
+# D=784
+# means = 20*np.random.rand(K,D) - 10
+# x = np.vstack([np.random.randn(N,D) + means[i] for i in range(K)])
+# np.random.shuffle(x)
+# x = unit_norm(x)
+
+x = np.loadtxt('../../anna_full_metabolomics_data.csv', delimiter=',',skiprows=1)
+print("loaded")
+
 x = x.astype(np.float32)
 x = np.require(x, requirements=['A', 'C', 'O', 'W'])
 print(x)
@@ -47,27 +51,13 @@ print('======== SCC ==========')
 t = gt()
 num_rounds = 50
 thresholds = np.geomspace(1.0, 0.001, num_rounds).astype(np.float32)
-scc = Cosine_SCC(k=5, num_rounds=num_rounds, thresholds=thresholds, index_name='cosine_sgtree', cores=cores, verbosity=1)
-out = scc.partial_fit(x)
+scc = Cosine_SCC(k=25, num_rounds=num_rounds, thresholds=thresholds, index_name='cosine_sgtree', cores=cores, verbosity=1)
+scc.partial_fit(x)
 b_t = gt() - t
 print("Clustering time:", b_t, "seconds")
 sys.stdout.flush()
 
-print(out)
 print(scc.index)
-#print(scc.scc.levels)
-#print(scc.scc.levels[0].nodes)
-
-print(scc.scc.roots())
-
-i = 0
-for l in [scc.scc.levels[len(scc.scc.levels)-1]]:
-      for n in l.nodes:
-            print(n.this, n.uid, n.height)
-            print(n.__dict__)
-            print(scc.index[n.this])
-            i+=1
-
 
 # print('======== MB-SCC ==========')
 # t = gt()

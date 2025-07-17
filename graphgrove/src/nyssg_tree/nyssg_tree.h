@@ -18,7 +18,7 @@
 # ifndef _NYSSG_TREE_H
 # define _NYSSG_TREE_H
 
-#include <Eigen/Core>
+#include <eigen3/Eigen/Core>
 #include <atomic>
 #include <fstream>
 #include <iostream>

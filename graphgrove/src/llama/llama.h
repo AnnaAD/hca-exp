@@ -43,7 +43,7 @@
 #define SHARED_MUTEX_TYPE shared_timed_mutex
 #endif
 
-#include <Eigen/Core>
+#include <eigen3/Eigen/Core>
 
 #include "utils.h"
 
@@ -68,7 +68,7 @@ public:
     static LLAMA *from_graph(
         std::vector<uint32_t> r,
         std::vector<uint32_t> c,
-        std::vector<Eigen::VectorXf::Scalar> s,
+        std::vector<eigen3/Eigen::VectorXf::Scalar> s,
         unsigned linkage,
         unsigned num_rounds,
         scalar *thresholds,
@@ -80,7 +80,7 @@ public:
     LLAMA(
         std::vector<uint32_t> r,
         std::vector<uint32_t> c,
-        std::vector<Eigen::VectorXf::Scalar> s,
+        std::vector<eigen3/Eigen::VectorXf::Scalar> s,
         unsigned linkage,
         unsigned num_rounds,
         scalar *thresholds,
