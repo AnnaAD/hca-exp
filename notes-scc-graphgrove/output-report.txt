@@ -1,0 +1,268 @@
+SCC.init v024
+SG Tree [v008] with base 1.3
+SG Tree with Number of Cores: 1
+numPoints: 20
+Max distance: 0.588561
+Min distance: 0.300657
+Scale chosen: 0
+(10, 20)
+Level Start - TreeLevel - height=0 nodes=20 total_time=0 best_neighbor_time=0 cc_time=0 graph_update_time=0 overall_update_time=0
+Level Finished Best NN - TreeLevel - height=0 nodes=20 total_time=0 best_neighbor_time=0 cc_time=0 graph_update_time=0 overall_update_time=0
+Level Connected Components - TreeLevel - height=0 nodes=20 total_time=0 best_neighbor_time=0 cc_time=0 graph_update_time=0 overall_update_time=0
+Level End - TreeLevel - height=0 nodes=20 total_time=2.6e-05 best_neighbor_time=0 cc_time=0 graph_update_time=0 overall_update_time=1.5e-05
+Level Start - TreeLevel - height=1 nodes=20 total_time=2.6e-05 best_neighbor_time=0 cc_time=0 graph_update_time=0 overall_update_time=0
+Level Finished Best NN - TreeLevel - height=1 nodes=20 total_time=2.6e-05 best_neighbor_time=0 cc_time=0 graph_update_time=0 overall_update_time=0
+Level Connected Components - TreeLevel - height=1 nodes=20 total_time=2.6e-05 best_neighbor_time=0 cc_time=0 graph_update_time=0 overall_update_time=0
+Level End - TreeLevel - height=1 nodes=20 total_time=3.7e-05 best_neighbor_time=0 cc_time=0 graph_update_time=0 overall_update_time=5e-06
+Level Start - TreeLevel - height=2 nodes=5 total_time=3.7e-05 best_neighbor_time=0 cc_time=0 graph_update_time=0 overall_update_time=0
+Level Finished Best NN - TreeLevel - height=2 nodes=5 total_time=3.7e-05 best_neighbor_time=0 cc_time=0 graph_update_time=0 overall_update_time=0
+Level Connected Components - TreeLevel - height=2 nodes=5 total_time=3.7e-05 best_neighbor_time=0 cc_time=0 graph_update_time=0 overall_update_time=0
+Level End - TreeLevel - height=2 nodes=5 total_time=4.3e-05 best_neighbor_time=0 cc_time=0 graph_update_time=0 overall_update_time=1e-06
+Level Start - TreeLevel - height=3 nodes=3 total_time=4.3e-05 best_neighbor_time=0 cc_time=0 graph_update_time=0 overall_update_time=0
+Level Finished Best NN - TreeLevel - height=3 nodes=3 total_time=4.3e-05 best_neighbor_time=0 cc_time=0 graph_update_time=0 overall_update_time=0
+Level Connected Components - TreeLevel - height=3 nodes=3 total_time=4.3e-05 best_neighbor_time=0 cc_time=0 graph_update_time=0 overall_update_time=0
+Level End - TreeLevel - height=3 nodes=3 total_time=5e-05 best_neighbor_time=0 cc_time=0 graph_update_time=0 overall_update_time=2e-06
+Level Start - TreeLevel - height=4 nodes=3 total_time=5e-05 best_neighbor_time=0 cc_time=0 graph_update_time=0 overall_update_time=0
+Level Finished Best NN - TreeLevel - height=4 nodes=3 total_time=5e-05 best_neighbor_time=0 cc_time=0 graph_update_time=0 overall_update_time=0
+Level Connected Components - TreeLevel - height=4 nodes=3 total_time=5e-05 best_neighbor_time=0 cc_time=0 graph_update_time=0 overall_update_time=0
+Level End - TreeLevel - height=4 nodes=3 total_time=5.7e-05 best_neighbor_time=0 cc_time=0 graph_update_time=0 overall_update_time=1e-06
+[[ 0.14201808  0.5409875   0.36781508  0.3117388   0.05246726  0.18678539
+   0.03105618  0.41624632  0.37407702  0.3207704 ]
+ [ 0.23376319  0.4461819   0.35421285  0.3655451   0.13588883  0.10234959
+   0.02750038  0.4942547   0.26795414  0.3760345 ]
+ [ 0.16348727  0.52579844  0.38142613  0.2102118   0.0937828   0.05847459
+  -0.00478233  0.4615521   0.35049775  0.39876887]
+ [ 0.14970133  0.47379744  0.39412346  0.35862842  0.05568435  0.07079128
+  -0.02706913  0.3845605   0.35149646  0.43459913]
+ [ 0.1828428   0.5231682   0.38234994  0.26587108  0.09564662  0.15420185
+   0.02712784  0.50901866  0.16880697  0.3933528 ]
+ [ 0.2153264   0.5173598   0.41642693  0.22468501  0.07531691  0.10771003
+   0.11566991  0.45754266  0.29231164  0.36963984]
+ [ 0.07421523  0.66374236  0.51592815  0.17452016  0.12677531  0.18550977
+   0.1549088   0.32564783  0.25995037  0.09589437]
+ [ 0.03310559  0.65689176  0.54934955  0.12457034  0.02657066  0.09321649
+   0.17805105  0.29317543  0.27423912  0.2187193 ]
+ [ 0.12514876  0.5906597   0.5133881   0.1225713  -0.00601337  0.10812952
+   0.18560582  0.46127325  0.24688932  0.19225717]
+ [ 0.0105522   0.5259919   0.58375746  0.17729457  0.1608902   0.05701506
+   0.2740953   0.23712946  0.30252647  0.3146391 ]
+ [-0.0518054   0.6029484   0.5561584   0.10694697  0.01766607  0.12561037
+   0.13072763  0.37771133  0.22447005  0.29459658]
+ [-0.03631589  0.5897654   0.5747277   0.05613516  0.12866418  0.1975639
+   0.09024999  0.34165618  0.2880155   0.23234001]
+ [ 0.3360035   0.00512666  0.23701155  0.27261195  0.33115882  0.56429017
+   0.09063057  0.36993852  0.42793682 -0.01719722]
+ [ 0.5017425   0.11743568  0.10872411  0.2714844   0.22534937  0.5428746
+   0.19828466  0.27157804  0.43281952  0.05512957]
+ [ 0.4772552   0.22634909  0.1840136   0.20009202  0.25244144  0.48381245
+   0.13199979  0.37706125  0.42638764  0.0888202 ]
+ [ 0.39936054  0.1855275   0.17304274  0.41579062  0.33779988  0.45557433
+   0.06030241  0.36635712  0.37129843  0.07675868]
+ [ 0.46055725  0.0923739   0.144953    0.15013155  0.2874522   0.6084265
+   0.15446763  0.27225024  0.42601144  0.05937581]
+ [ 0.36229235  0.10718323  0.20622236  0.1744544   0.3404092   0.58223337
+   0.21315263  0.42883614  0.31466225 -0.0327586 ]
+ [ 0.38408634  0.110516    0.19897455  0.4352      0.29712138  0.5203701
+   0.17084914  0.3354599   0.32475644  0.07083965]
+ [ 0.39327663  0.08520142  0.17921953  0.27555114  0.5058114   0.44027168
+   0.19738476  0.2596703   0.40111247  0.11428569]]
+Test data shape: (20, 10)
+Creating SCC clustering...
+Thresholds: [1.         0.56234133 0.31622776 0.17782794 0.1       ]
+
+=== SCC Structure ===
+Number of levels: 6
+
+Level 0 (height=0):
+  Number of nodes: 20
+  Node 0: id=0, height=0
+    Descendants: [[0]]
+    Children: []
+  Node 1: id=1, height=0
+    Descendants: [[1]]
+    Children: []
+  Node 2: id=2, height=0
+    Descendants: [[2]]
+    Children: []
+  Node 3: id=3, height=0
+    Descendants: [[3]]
+    Children: []
+  Node 4: id=4, height=0
+    Descendants: [[4]]
+    Children: []
+
+Level 1 (height=1):
+  Number of nodes: 20
+  Node 0: id=0, height=1
+    Descendants: [[0]]
+    Children: [0]
+  Node 1: id=1, height=1
+    Descendants: [[1]]
+    Children: [1]
+  Node 2: id=2, height=1
+    Descendants: [[2]]
+    Children: [2]
+  Node 3: id=3, height=1
+    Descendants: [[3]]
+    Children: [3]
+  Node 4: id=4, height=1
+    Descendants: [[4]]
+    Children: [4]
+
+Level 2 (height=2):
+  Number of nodes: 5
+  Node 0: id=0, height=2
+    Descendants: [[0]
+ [1]
+ [2]
+ [3]
+ [4]
+ [5]]
+    Children: [5, 4, 3, 2, 1, 0]
+  Node 1: id=6, height=2
+    Descendants: [[ 6]
+ [ 7]
+ [ 8]
+ [ 9]
+ [10]
+ [11]]
+    Children: [11, 10, 9, 8, 7, 6]
+  Node 2: id=12, height=2
+    Descendants: [[12]
+ [17]]
+    Children: [17, 12]
+  Node 3: id=13, height=2
+    Descendants: [[13]
+ [14]
+ [16]]
+    Children: [16, 14, 13]
+  Node 4: id=15, height=2
+    Descendants: [[15]
+ [18]
+ [19]]
+    Children: [19, 18, 15]
+
+Level 3 (height=3):
+  Number of nodes: 3
+  Node 0: id=0, height=3
+    Descendants: [[0]
+ [1]
+ [2]
+ [3]
+ [4]
+ [5]]
+    Children: [0]
+  Node 1: id=6, height=3
+    Descendants: [[ 6]
+ [ 7]
+ [ 8]
+ [ 9]
+ [10]
+ [11]]
+    Children: [6]
+  Node 2: id=12, height=3
+    Descendants: [[12]
+ [13]
+ [14]
+ [15]
+ [16]
+ [17]
+ [18]
+ [19]]
+    Children: [15, 13, 12]
+
+Level 4 (height=4):
+  Number of nodes: 3
+  Node 0: id=0, height=4
+    Descendants: [[0]
+ [1]
+ [2]
+ [3]
+ [4]
+ [5]]
+    Children: [0]
+  Node 1: id=6, height=4
+    Descendants: [[ 6]
+ [ 7]
+ [ 8]
+ [ 9]
+ [10]
+ [11]]
+    Children: [6]
+  Node 2: id=12, height=4
+    Descendants: [[12]
+ [13]
+ [14]
+ [15]
+ [16]
+ [17]
+ [18]
+ [19]]
+    Children: [12]
+
+Level 5 (height=5):
+  Number of nodes: 3
+  Node 0: id=0, height=5
+    Descendants: [[0]
+ [1]
+ [2]
+ [3]
+ [4]
+ [5]]
+    Children: [0]
+  Node 1: id=6, height=5
+    Descendants: [[ 6]
+ [ 7]
+ [ 8]
+ [ 9]
+ [10]
+ [11]]
+    Children: [6]
+  Node 2: id=12, height=5
+    Descendants: [[12]
+ [13]
+ [14]
+ [15]
+ [16]
+ [17]
+ [18]
+ [19]]
+    Children: [12]
+
+=== Root Nodes (Top Level Clusters) ===
+Number of root clusters: 3
+
+Root cluster 0:
+  ID: 0
+  Height: 5
+  Descendants (leaf nodes): [[0]
+ [1]
+ [2]
+ [3]
+ [4]
+ [5]]
+  Number of points in cluster: 6
+
+Root cluster 1:
+  ID: 6
+  Height: 5
+  Descendants (leaf nodes): [[ 6]
+ [ 7]
+ [ 8]
+ [ 9]
+ [10]
+ [11]]
+  Number of points in cluster: 6
+
+Root cluster 2:
+  ID: 12
+  Height: 5
+  Descendants (leaf nodes): [[12]
+ [13]
+ [14]
+ [15]
+ [16]
+ [17]
+ [18]
+ [19]]
+  Number of points in cluster: 8
