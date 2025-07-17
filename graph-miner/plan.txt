@@ -1,0 +1,5 @@
+- structure with graph from graphMiner library for CSR representation
+- undirected graph with edge weights based on distance metric?
+    - or 1-nearest neighbor graph only
+- then sparsify graph w/ tau
+- run on disconnected components in parallel?

@@ -12,3 +12,29 @@ This repository is an adaptation of Daniel Mullner's work:
 
 This version is a standalone c++ library by Christoph Dalitz, [cdalitz](https://github.com/cdalitz).
 
+Changes made:
+- include/build with openmp.
+- add timer via include dir.
+
+## scc
+
+This is an implementation of scc in python.
+
+Changes made: 
+- `.A` syntax for matrices no longer supported in numpy for certain types of matrices??
+    - switched to `.toarray()` when complaints arrose
+
+`pip install .`
+installs scc based on setup.py file.
+
+
+## graphgrove
+
+Changes made:
+- how to include Eigen library OR the C
+
+`pip install .`
+- builds graphgrove cpp
+- installs python project
+
+

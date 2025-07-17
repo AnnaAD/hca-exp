@@ -7,8 +7,12 @@
 #--------------------------------------------
 CC = g++
 CFLAGS = -Wall -g -std=c++11 
-LDFLAGS = -L/opt/homebrew/opt/libomp/lib -lstdc++
-INCLUDES = -I/opt/homebrew/opt/libomp/include -I../include 
+#For mac: LDFLAGS = -L/opt/homebrew/opt/libomp/lib -lstdc++
+#For mac: INCLUDES = -I/opt/homebrew/opt/libomp/include -I../include 
+LDFLAGS = -lstdc++
+INCLUDES = -I../include 
+#For mac: OMPFLAG = -lomp
+OMPFLAG = -lgomp
 
 
 # project files
@@ -23,7 +27,7 @@ TGZDIR = hclust-cpp
 all: $(PROGRAM)
 
 $(PROGRAM): $(OBJECTS)
-	$(CC) -o $@ $+ $(LDFLAGS) $(INCLUDES) -lomp
+	$(CC) -o $@ $+ $(LDFLAGS) $(INCLUDES) $(OMPFLAG)
 
 # generic rule for compiling *.cpp -> *.o
 %.o: %.cpp

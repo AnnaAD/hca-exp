@@ -70,14 +70,14 @@ def main(argv):
     upper = 1.0
     lower = 0.1
     num_rounds = 60
-    X = np.random.randn(10000,100)
-    graph = graph_from_vectors(X, k=1000, batch_size=5000)
+    X = np.loadtxt('../../anna_full_metabolomics_data.csv', delimiter=',',skiprows=1)
+    print("loaded")
+    print(X)
+    graph = graph_from_vectors(X, k=25, batch_size=5000)
     print(graph)
     taus = np.geomspace(start=upper, stop=lower, num=num_rounds)
     scc = SCC(graph, num_rounds, taus)
     scc.fit()
-
-    print(scc.__dict__)
 
     # How to inspect this? 
     # this gives the things stored in the 3rd round of the alg.  (0 based)
@@ -94,7 +94,6 @@ def main(argv):
     print('scc.rounds[3].parents[0]')
     print(scc.rounds[3].parents[0])
 
-    print(scc.rounds[len(scc.rounds)-1].cluster_assignments)
 
 if __name__ == "__main__":
    app.run(main)
