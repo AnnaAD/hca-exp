@@ -48,10 +48,13 @@ t = gt()
 num_rounds = 50
 thresholds = np.geomspace(1.0, 0.001, num_rounds).astype(np.float32)
 scc = Cosine_SCC(k=5, num_rounds=num_rounds, thresholds=thresholds, index_name='cosine_sgtree', cores=cores, verbosity=1)
+
 out = scc.partial_fit(x)
 b_t = gt() - t
 print("Clustering time:", b_t, "seconds")
 sys.stdout.flush()
+
+
 
 print(out)
 print(scc.index)
@@ -60,14 +63,17 @@ print(scc.index)
 
 print(scc.scc.roots())
 
-i = 0
-for l in [scc.scc.levels[len(scc.scc.levels)-1]]:
-      for n in l.nodes:
-            print(n.this, n.uid, n.height)
-            print(n.__dict__)
-            print(scc.index[n.this])
-            i+=1
-
+print("\nLevel summary:")
+for i, level in enumerate(scc.scc.levels):
+    print(f"Level {i}: {len(level.nodes)} nodes at height {level.height:.4f}")
+    if i == len(scc.scc.levels) - 1:  # Final level
+        print("Final clusters:")
+        for j, node in enumerate(level.nodes[:10]):  # Show first 10 clusters
+            desc_count = len(node.descendants())
+            for n in node.descendants():
+                  print(n)
+            print(f"  Cluster {j}: {desc_count} points")
+sys.stdout.flush()
 
 # print('======== MB-SCC ==========')
 # t = gt()

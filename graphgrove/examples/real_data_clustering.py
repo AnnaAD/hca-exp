@@ -177,22 +177,39 @@ x = np.loadtxt('../../anna_full_metabolomics_data.csv', delimiter=',',skiprows=1
 print("loaded")
 
 print(x.shape)
+print(x.mean())
+print(x[:5][:5])
 
 x = x.astype(np.float32)
+#x = unit_norm(x)  # Normalize for cosine similarity
 x = np.require(x, requirements=['A', 'C', 'O', 'W'])
 print(x)
+print(f"Data shape: {x.shape}")
+print(f"Data range: [{x.min():.3f}, {x.max():.3f}]")
+print(f"Norm of first vector: {np.linalg.norm(x[0]):.3f}")
 
 print('======== SCC ==========')
 t = gt()
 num_rounds = 50
-thresholds = np.geomspace(1.0, 0.001, num_rounds).astype(np.float32)
-scc = Cosine_SCC(k=50, num_rounds=num_rounds, thresholds=thresholds, index_name='cosine_sgtree', cores=cores, verbosity=1)
+thresholds = np.geomspace(1.0, .1, num_rounds).astype(np.float32)
+print(thresholds)
+scc = Cosine_SCC(k=10, num_rounds=num_rounds, thresholds=thresholds, index_name='cosine_sgtree', cores=cores, verbosity=1)
 scc.partial_fit(x)
 b_t = gt() - t
 print("Clustering time:", b_t, "seconds")
+
+print(thresholds)
+print("\nLevel summary:")
+for i, level in enumerate(scc.scc.levels):
+    print(f"Level {i}: {len(level.nodes)} nodes at height {level.height:.4f}")
+    if i == len(scc.scc.levels) - 1:  # Final level
+        print("Final clusters:")
+        for j, node in enumerate(level.nodes[:10]):  # Show first 10 clusters
+            desc_count = len(node.descendants())
+            print(f"  Cluster {j}: {desc_count} points")
 sys.stdout.flush()
 
-plot_scc_dendrogram(scc, method="custom", top_n_levels=5)
+#plot_scc_dendrogram(scc, method="custom", top_n_levels=1)
 
 # print('======== MB-SCC ==========')
 # t = gt()
