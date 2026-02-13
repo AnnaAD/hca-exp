@@ -1,2 +1,5 @@
 anna_full_metabolomics_data.csv
 venv/
+*.svg
+*.dot
+*.txt

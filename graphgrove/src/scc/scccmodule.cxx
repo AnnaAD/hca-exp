@@ -621,6 +621,10 @@ static PyObject *sccc_level_property(PyObject *self, PyObject *args)
   PyDict_SetItemString(results, "height", o);
   Py_DECREF(o);
 
+  o = PyFloat_FromDouble((double)(obj->threshold));
+  PyDict_SetItemString(results, "threshold", o);
+  Py_DECREF(o);
+
   return Py_BuildValue("N", results);
 }
 

@@ -13,6 +13,50 @@ sys.path.append('graphgrove')
 from graphgrove.vec_scc import Cosine_SCC
 from graphgrove.graph_builder import unit_norm
 
+from test_cluster_recovery import get_cluster_assignments
+
+def custom_sparse_distance_tree_plot(scc, data, top_n, figsize=(12,8), leaves = False):
+    print("Plotting", max(0, len(scc.scc.levels) - top_n),"-", len(scc.scc.levels))
+
+    print(len(scc.scc.levels)) 
+
+    level = scc.scc.levels[-1] # start at last level
+
+    dx = 0
+    dy = 0
+
+    from treelib import Node, Tree
+
+    tree = Tree()
+
+    tree.create_node(f"ROOT",f"ROOT")
+
+    start = 1
+    end = top_n
+    last_len = 0
+    for i in range(start,end):
+        print("LEVEL",i, level.__dict__)
+        level = scc.scc.levels[len(scc.scc.levels)-i]
+        for idx,n in enumerate(level.nodes):
+            #print("UID",n.uid)
+            if i == start:
+                #print("adding", f"c{i}-{n.uid}")
+                tree.create_node(f"c{i}-{n.uid}",f"c{i}-{n.uid}","ROOT")
+
+            for c in n.children:
+                tree.create_node(f"c{i+1}-{c.uid}",f"c{i+1}-{c.uid}",parent=f"c{i}-{n.uid}")
+                #print("adding", f"c{i+1}-{c.uid}")
+                if(i == end-1 and leaves):
+                    for leaf in c.descendants():
+                        #print("adding leaf")
+                        tree.create_node(f"{data[leaf]}",f"{leaf}",parent=f"c{i+1}-{c.uid}")
+
+ 
+    tree.to_graphviz("tree.dot")
+    tree.save2file("tree.txt")
+    # dot -Tsvg tree.dot > out.svg
+
+    #tree.show()
 
 def custom_tree_plot(scc, figsize=(12, 8), top_n_levels=5):
     """
@@ -303,8 +347,8 @@ def plot_scc_dendrogram(scc, X=None, method='binary', **kwargs):
 if __name__ == "__main__":
     # Test data
     np.random.seed(42)
-    N = 3000
-    K = 3
+    N = 5000
+    K = 5
     D = 5
     
     # Create clusters
@@ -314,10 +358,10 @@ if __name__ == "__main__":
     x = x.astype(np.float32)
     
     # Fit SCC
-    num_rounds = 100
-    thresholds = np.geomspace(1.0, 0.001, num_rounds).astype(np.float32)
+    num_rounds = 50
+    thresholds = np.geomspace(2.0, 0.001, num_rounds).astype(np.float32)
     scc = Cosine_SCC(k=5, num_rounds=num_rounds, thresholds=thresholds, 
-                     index_name='cosine_sgtree', cores=1, verbosity=0)
+                     index_name='cosine_sgtree', cores=12, verbosity=0)
     scc.partial_fit(x)
     
     print("Testing different dendrogram approaches:\n")
@@ -330,4 +374,6 @@ if __name__ == "__main__":
     # plot_scc_dendrogram(scc, X=x, method='distance')
     
     print("\n3. Custom tree visualization:")
-    custom_tree_plot(scc, top_n_levels = 5)
+    #approach3_custom_tree_plot(scc, X=x, top_n_levels = 5)
+
+    custom_sparse_distance_tree_plot(scc, x, len(scc.scc.levels), leaves=True)

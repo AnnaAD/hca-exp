@@ -9,13 +9,18 @@ import matplotlib.pyplot as plt
 from graphgrove.vec_scc import Cosine_SCC
 from graphgrove.graph_builder import unit_norm
 
+from plot_scc_dendrogram_fixed import custom_sparse_distance_tree_plot
+
 gt = time.time
 
 np.random.seed(123)
 cores = 12
 
 print('======== Loading Dataset ==========')
-x = np.loadtxt('anna_full_metabolomics_data.csv', delimiter=',',skiprows=1)
+with open('anna_full_metabolomics_data.csv') as f:
+    ncols = len(f.readline().split(','))
+
+x = np.loadtxt('anna_full_metabolomics_data.csv', delimiter=',', skiprows=1, usecols=range(1,ncols))
 print("loaded")
 
 print(x.shape)
@@ -23,7 +28,7 @@ print(x.mean())
 print(x[:5][:5])
 
 x = x.astype(np.float32)
-x = unit_norm(x)  # Normalize for cosine similarity
+#x = unit_norm(x)  # Normalize for cosine similarity
 x = np.require(x, requirements=['A', 'C', 'O', 'W'])
 print(x)
 print(f"Data shape: {x.shape}")
@@ -33,7 +38,7 @@ print(f"Norm of first vector: {np.linalg.norm(x[0]):.3f}")
 
 print('======== SCC ==========')
 t = gt()
-num_rounds = 50
+num_rounds = 100
 thresholds = np.geomspace(1.0, 0.001, num_rounds).astype(np.float32)
 scc = Cosine_SCC(k=5, num_rounds=num_rounds, thresholds=thresholds, index_name='cosine_sgtree', cores=cores, verbosity=1)
 
@@ -66,4 +71,4 @@ plt.tight_layout()
 plt.savefig('mb.png', dpi=150)
 print("Saved visualization to 'mb.png'")
 
-plot_scc_dendrogram(scc, method='custom')
+custom_sparse_distance_tree_plot(scc, x, 20, leaves=True)

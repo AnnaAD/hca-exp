@@ -60,7 +60,7 @@ class Node(object):
 class Level(object):
   import sccc
   """SCC node from c++."""
-  base_vars = ['this', 'height']
+  base_vars = ['this', 'height', 'threshold']
 
   def __init__(self, this):
     info = sccc.level_property(this)

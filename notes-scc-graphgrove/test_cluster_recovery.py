@@ -22,6 +22,9 @@ def get_cluster_assignments(scc, level_idx):
     """
     level = scc.scc.levels[level_idx]
     n_vectors = scc.point_counter
+
+    print("LEVEL", level.__dict__)
+
     
     # Initialize with -1 to detect any unmapped vectors
     assignments = np.full(n_vectors, -1, dtype=int)
