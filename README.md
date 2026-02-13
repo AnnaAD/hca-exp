@@ -32,6 +32,13 @@ installs scc based on setup.py file.
 
 Changes made:
 - how to include Eigen library OR the C
+- exposed TreeLevel threshold field with updated to scc.py and scc/scccmodule.cxx via:
+
+```cpp
+  o = PyFloat_FromDouble((double)(obj->threshold));
+  PyDict_SetItemString(results, "threshold", o);
+  Py_DECREF(o);
+```
 
 `pip install .`
 - builds graphgrove cpp
