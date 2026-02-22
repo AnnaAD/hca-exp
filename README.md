@@ -44,4 +44,13 @@ Changes made:
 - builds graphgrove cpp
 - installs python project
 
+## terahac
+
+Downloaded from https://github.com/google/graph-mining/tree/main/in_memory/clustering/hac 
+
+The code implementation of the TeraHAC paper.
+
+Key difference from SCC is that it defines a 1-epsilon "good" clustering. Can achieve similar quality to SCC in fewer rounds, thus faster?
+
+
 
